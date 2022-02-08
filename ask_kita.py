@@ -41,11 +41,11 @@ class Ask_KITA:
             data = self.q.get()
             d = self._get_current_phrase(self.recogniser, data)
             (key, value), = d.items()
-            if self._stop(data):
-                self._clear()
-                return
+            # if self._stop(data):
+            #     self._clear()
+            #     return
             if value and (value != self.previous_line or key == 'text'):
-                print(d)
+                # print(d)
                 self._write(d)
                 self.previous_line = value
 

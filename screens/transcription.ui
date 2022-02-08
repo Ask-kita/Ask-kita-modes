@@ -30,9 +30,9 @@ background-color:qlineargradient(spread:pad, x1:0.0549451, y1:0.057, x2:0.884615
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>50</y>
+      <y>40</y>
       <width>761</width>
-      <height>91</height>
+      <height>121</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -53,23 +53,42 @@ font: 75 48pt &quot;MS Shell Dlg 2&quot;;</string>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="start">
+   <widget class="QPushButton" name="transcribe">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>670</y>
+      <x>690</x>
+      <y>650</y>
       <width>211</width>
       <height>101</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
-font: 75 26pt &quot;MS Shell Dlg 2&quot;;
+font: 75 18pt &quot;MS Shell Dlg 2&quot;;
 
-background-color: rgb(255, 0, 0)</string>
+background-color: rgb(85, 170, 0)</string>
     </property>
     <property name="text">
-     <string>STOP</string>
+     <string>Transcribe</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="home">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>660</y>
+      <width>211</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:20px;
+font: 75 18pt &quot;MS Shell Dlg 2&quot;;
+
+background-color: rgb(85, 170, 0)</string>
+    </property>
+    <property name="text">
+     <string>Home</string>
     </property>
    </widget>
   </widget>
