@@ -6,7 +6,6 @@ import sys
 import json
 import pyautogui
 import os
-import threading
 from multiprocessing import Process
 
 class Ask_KITA:
@@ -26,7 +25,6 @@ class Ask_KITA:
 
     def recognise_speech(self):
         try:
-
             with sd.RawInputStream(samplerate=self.samplerate, blocksize=8000, device=None, dtype='int16', channels=1,
                                    callback=self._callback):
                 print('#' * 80)
@@ -35,7 +33,6 @@ class Ask_KITA:
                 self._write_current_phrase()
         except KeyboardInterrupt:
             print('\nDone -- KEYBOARDiNTERRUPT')
-
         except Exception as e:
             print('exception', e)
 
@@ -45,6 +42,7 @@ class Ask_KITA:
             d = self._get_current_phrase(self.recogniser, data)
             (key, value), = d.items()
             if self._stop(data):
+                self._clear()
                 return
             if value and (value != self.previous_line or key == 'text'):
                 print(d)
@@ -76,18 +74,25 @@ class Ask_KITA:
             sys.stdout.flush()
         self.q.put(bytes(indata))
 
+    def _clear(self):
+        pyautogui.press('backspace', presses=self.previous_length)
+
     def _write(self, phrase):
         pyautogui.press('backspace', presses=self.previous_length)
         if 'text' in phrase:
             pyautogui.write(phrase['text'] + '\n')
             self.previous_length = 0
         else:
-            pyautogui.write(phrase['partial'])
+            pyautogui.typewrite(phrase['partial'])
             self.previous_length = len(phrase['partial'])
 
 
+def start_recognising(stop_word):
+    kita = Ask_KITA(stop_word=stop_word)
+    kita.recognise_speech()
+
+
 def start_ask_kita_process(stop_word="kita"):
-    kita = Ask_KITA(stop_word="kita")
-    p = Process(target=kita.recognise_speech())
-    p.start()
-    return p
+    process = Process(target=start_recognising, args=(stop_word,))
+    process.start()
+    return process
