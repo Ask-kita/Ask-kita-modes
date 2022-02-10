@@ -1,6 +1,5 @@
 
-from ask_kita import start_ask_kita_process
-from view import HomeScreen, show_gui
+from view import show_gui
 
 
 if __name__ == '__main__':

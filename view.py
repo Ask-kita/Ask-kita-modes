@@ -50,6 +50,7 @@ class TranscriptionScreen(QDialog):
 
     def stop_transcription(self):
         self.process.terminate()
+        self.process.kill()
         self.process = None
         self.transcribe.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:green')
         self.transcribe.setText("Transcribe")

@@ -41,7 +41,7 @@ class Ask_KITA:
                         if d[key]:
                             if d[key] != self.previous_line or key == 'text':
                                 print(d)
-                                self._write(d)
+                                # self._write(d)
                                 self.previous_line = d[key]
 
         except KeyboardInterrupt:
