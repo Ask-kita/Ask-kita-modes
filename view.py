@@ -3,7 +3,7 @@ import os
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QStackedWidget
-from ask_kita import start_ask_kita_process
+from ask_kita import Ask_KITA
 
 HOME_SCREEN = os.path.join('screens', 'home.ui')
 TRANSCRIPTION_SCREEN = os.path.join('screens', 'transcription.ui')
@@ -31,27 +31,47 @@ class TranscriptionScreen(QDialog):
     def __init__(self, widget):
         super(TranscriptionScreen, self).__init__()
         self.stackedWidget = widget
-        self.process = None
         loadUi(TRANSCRIPTION_SCREEN, self)
         self.transcribe.clicked.connect(self.switch_transcription)
         self.home.clicked.connect(self.goto_home_screen)
 
-    def switch_transcription(self):
-        print("transcribe")
-        if not self.process:
-            self.start_transcription()
-        else:
-            self.stop_transcription()
+        self.kita = Ask_KITA()
+        self.ask_kita_is_running = False
+        self.ask_kita_is_paused = False
 
-    def start_transcription(self):
-        self.process = start_ask_kita_process(stop_word="kita")
+    def switch_transcription(self):
+        if self.ask_kita_is_running and not self.ask_kita_is_paused:
+            print("Pause ask kita")
+            self.pause_ask_kita()
+
+        elif self.ask_kita_is_paused:
+            print("Resume ask kita")
+            self.resume_ask_kita()
+
+        else:
+            print("Start ask kita")
+            self.start_ask_kita()
+
+    def pause_ask_kita(self):
+        self.kita.pause()
+        self.ask_kita_is_paused = True
+        self.change_button_to_transcribe()
+
+    def resume_ask_kita(self):
+        self.kita.resume()
+        self.ask_kita_is_paused = False
+        self.change_button_to_stop()
+
+    def start_ask_kita(self):
+        self.kita.start()
+        self.ask_kita_is_running = True
+        self.change_button_to_stop()
+
+    def change_button_to_stop(self):
         self.transcribe.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:red')
         self.transcribe.setText("Stop")
 
-    def stop_transcription(self):
-        self.process.terminate()
-        self.process.kill()
-        self.process = None
+    def change_button_to_transcribe(self):
         self.transcribe.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:green')
         self.transcribe.setText("Transcribe")
 
@@ -72,4 +92,3 @@ def show_gui():
         sys.exit(app.exec_())
     except:
         print("exiting")
-
