@@ -46,15 +46,15 @@ font: 75 48pt &quot;MS Shell Dlg 2&quot;;</string>
    <widget class="QPushButton" name="start">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>220</y>
+      <x>440</x>
+      <y>250</y>
       <width>211</width>
       <height>101</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
-font: 75 26pt &quot;MS Shell Dlg 2&quot;;
+font: 75 20pt &quot;MS Shell Dlg 2&quot;;
 
 background-color: rgb(170, 170, 255)</string>
     </property>
@@ -65,39 +65,20 @@ background-color: rgb(170, 170, 255)</string>
    <widget class="QPushButton" name="settings">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>560</y>
+      <x>440</x>
+      <y>450</y>
       <width>211</width>
       <height>101</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
-font: 75 26pt &quot;MS Shell Dlg 2&quot;;
+font: 75 20pt &quot;MS Shell Dlg 2&quot;;
 
 background-color: rgb(170, 170, 255)</string>
     </property>
     <property name="text">
      <string>Settings</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="upload">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>390</y>
-      <width>211</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:20px;
-font: 75 26pt &quot;MS Shell Dlg 2&quot;;
-
-background-color: rgb(170, 170, 255)</string>
-    </property>
-    <property name="text">
-     <string>Upload</string>
     </property>
    </widget>
   </widget>
