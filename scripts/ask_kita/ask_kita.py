@@ -48,7 +48,6 @@ class Ask_KITA(threading.Thread):
                         self.state.wait()  # Block execution until notified.
                         with self.q.mutex:
                             self.q.queue.clear()
-                # Do stuff...
                 self._perform_action()
 
     def pause(self):
