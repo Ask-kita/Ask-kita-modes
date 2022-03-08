@@ -53,8 +53,7 @@ extern PyObject *modulecode_scripts$controller$constants(PyObject *, struct Nuit
 extern PyObject *modulecode_scripts$controller$controller(PyObject *, struct Nuitka_MetaPathBasedLoaderEntry const *);
 extern PyObject *modulecode_scripts$view(PyObject *, struct Nuitka_MetaPathBasedLoaderEntry const *);
 extern PyObject *modulecode_scripts$view$constants(PyObject *, struct Nuitka_MetaPathBasedLoaderEntry const *);
-extern PyObject *modulecode_scripts$view$home_screen(PyObject *, struct Nuitka_MetaPathBasedLoaderEntry const *);
-extern PyObject *modulecode_scripts$view$settings_screen(PyObject *, struct Nuitka_MetaPathBasedLoaderEntry const *);
+extern PyObject *modulecode_scripts$view$screens(PyObject *, struct Nuitka_MetaPathBasedLoaderEntry const *);
 
 static struct Nuitka_MetaPathBasedLoaderEntry meta_path_loader_entries[] = {
     {"PyQt5", modulecode_PyQt5, 0, 0, NUITKA_TRANSLATED_FLAG | NUITKA_PACKAGE_FLAG},
@@ -128,8 +127,7 @@ static struct Nuitka_MetaPathBasedLoaderEntry meta_path_loader_entries[] = {
     {"scripts.controller.controller", modulecode_scripts$controller$controller, 0, 0, NUITKA_TRANSLATED_FLAG},
     {"scripts.view", modulecode_scripts$view, 0, 0, NUITKA_TRANSLATED_FLAG | NUITKA_PACKAGE_FLAG},
     {"scripts.view.constants", modulecode_scripts$view$constants, 0, 0, NUITKA_TRANSLATED_FLAG},
-    {"scripts.view.home_screen", modulecode_scripts$view$home_screen, 0, 0, NUITKA_TRANSLATED_FLAG},
-    {"scripts.view.settings_screen", modulecode_scripts$view$settings_screen, 0, 0, NUITKA_TRANSLATED_FLAG},
+    {"scripts.view.screens", modulecode_scripts$view$screens, 0, 0, NUITKA_TRANSLATED_FLAG},
     {"select", NULL, 0, 0, NUITKA_TRANSLATED_FLAG | NUITKA_EXTENSION_MODULE_FLAG},
     {"unicodedata", NULL, 0, 0, NUITKA_TRANSLATED_FLAG | NUITKA_EXTENSION_MODULE_FLAG},
     {"__future__", NULL, 22, 4079, NUITKA_TRANSLATED_FLAG | NUITKA_BYTECODE_FLAG},
