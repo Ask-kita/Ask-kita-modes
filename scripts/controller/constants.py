@@ -8,11 +8,11 @@ class Screen(IntEnum):
     COMMAND = 3
 
 
-class Mode(Enum):
-    TRANSCRIPTION = "Transcription"
-    COMMAND = "Command"
-
-
-class Language(Enum):
-    ENGLISH = 'English'
-    FRENCH = 'French'
+# class Mode(Enum):
+#     TRANSCRIPTION = "Transcription"
+#     COMMAND = "Command"
+#
+#
+# class Language(Enum):
+#     ENGLISH = 'English'
+#     FRENCH = 'French'

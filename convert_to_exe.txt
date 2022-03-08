@@ -1,1 +1,4 @@
-python -m nuitka --follow-imports --enable-plugin=pyqt5 --standalone main.py --include-data-dir=C:/Users/User/Documents/GitHub/Ask-kita-modes/screens=screens
+python -m nuitka --follow-imports --enable-plugin=pyqt5 --standalone main.py --include-data-dir=C:/Users/User/Documents/GitHub/Ask-kita-modes/screens=screens --include-data-dir=C:/Users/User/Documents/GitHub/Ask-kita-modes/models=models --enable-plugin=sounddevice --enable-plugin=vosk
+
+
+pyinstaller main.py --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/screens"  --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/models"

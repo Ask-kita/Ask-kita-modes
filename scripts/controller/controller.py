@@ -1,8 +1,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QStackedWidget
-
+from scripts.ask_kita import Ask_KITA
 from scripts.view import HomeScreen, SettingsScreen, TranscriptionScreen, CommandScreen
-from .constants import Screen, Mode, Language
+from .constants import Screen
+from scripts.constants import Mode, Language
 
 
 class Controller:
@@ -13,6 +14,12 @@ class Controller:
         self.widget.setFixedWidth(1200)
         self.widget.setFixedHeight(800)
         self._add_screens_to_stacked_widget(self._get_all_screens())
+        self.mode = None
+        self.language = None
+
+        self.kita = Ask_KITA()
+        self.ask_kita_is_started = False
+        self.ask_kita_is_paused = False
 
     def run(self):
         self.widget.setCurrentIndex(Screen.HOME)
@@ -45,37 +52,73 @@ class Controller:
 
         # transcription
         self.transcription.home.clicked.connect(self._goto_home)
+        self.transcription.transcribe.clicked.connect(self._change_kita_state)
 
         # command
         self.command.home.clicked.connect(self._goto_home)
-        # self.command.start.clicked.connect(self._goto_start_command_mode)
+        self.command.start.clicked.connect(self._change_kita_state)
+
+    def _change_kita_state(self):
+        self._change_thread_kita_state()
+        self._change_button_state()
+
+    def _change_button_state(self):
+        if self.mode == Mode.TRANSCRIPTION.value:
+            self._change_button_state_aux(self.transcription)
+        elif self.mode == Mode.COMMAND.value:
+            self._change_button_state_aux(self.command)
+
+    def _change_button_state_aux(self, screen):
+        if self.ask_kita_is_started:
+            if self.ask_kita_is_paused:
+                screen.change_button_to_transcribe()
+            else:
+                screen.change_button_to_stop()
+
+    def _change_thread_kita_state(self):
+        self.kita.set_mode_and_language(self.mode, self.language)
+        if self.ask_kita_is_started:
+            if self.ask_kita_is_paused:
+                print("RESUME KITA")
+                self.kita.resume()
+                self.ask_kita_is_paused = False
+            else:
+                self._pause_kita()
+        else:
+            print("START KITA")
+            self.ask_kita_is_started = True
+            self.kita.start()
+
+    def _pause_kita(self):
+        print("PAUSE KITA")
+        if self.ask_kita_is_started and not self.ask_kita_is_paused:
+            self.kita.pause()
+            self.ask_kita_is_paused = True
 
     def _goto_start(self):
-        mode, language = self._get_mode_and_language()
-        if mode == Mode.TRANSCRIPTION.value:
+        self.mode, self.language = self._set_mode_and_language()
+        if self.mode == Mode.TRANSCRIPTION.value:
             self._goto_transcription()
-        elif mode == Mode.COMMAND.value:
+        elif self.mode == Mode.COMMAND.value:
             self._goto_command()
         else:
-            print(mode, "HUH???")
+            print(self.mode, "HUH???")
 
     def _goto_home(self):
-        print("going home")
+        self._pause_kita()
+        self._change_button_state()
         self.widget.setCurrentIndex(Screen.HOME)
 
     def _goto_transcription(self):
-        print("transcribing")
         self.widget.setCurrentIndex(Screen.TRANSCRIPTION)
 
     def _goto_settings(self):
-        print("going to settings")
         self.widget.setCurrentIndex(Screen.SETTINGS)
 
     def _goto_command(self):
-        print("command mode")
         self.widget.setCurrentIndex(Screen.COMMAND)
 
-    def _get_mode_and_language(self):
+    def _set_mode_and_language(self):
         mode = self.settings.mode_dropdown.currentText()
         language = self.settings.lang_dropdown.currentText()
         if language == Language.ENGLISH.value:
