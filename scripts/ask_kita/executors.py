@@ -25,7 +25,6 @@ class TranscriptionExecutor(Executor):
             pyautogui.typewrite(dict['partial'])
             self.previous_length = len(dict['partial'])
 
-
 class CommandExecutor(Executor):
     def __init__(self):
         super(CommandExecutor, self).__init__()

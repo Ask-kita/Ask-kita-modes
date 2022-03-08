@@ -21,6 +21,8 @@ class Controller:
         self.ask_kita_is_started = False
         self.ask_kita_is_paused = False
 
+        self.corpus_file_path = None
+
     def run(self):
         self.widget.setCurrentIndex(Screen.HOME)
         self.widget.show()
@@ -49,6 +51,8 @@ class Controller:
 
         # settings
         self.settings.home.clicked.connect(self._goto_home)
+        self.settings.upload.clicked.connect(self._upload_corpus)
+
 
         # transcription
         self.transcription.home.clicked.connect(self._goto_home)
@@ -59,6 +63,7 @@ class Controller:
         self.command.start.clicked.connect(self._change_kita_state)
 
     def _change_kita_state(self):
+        self.kita.set_mode_and_language(self.mode, self.language)
         self._change_thread_kita_state()
         self._change_button_state()
 
@@ -76,7 +81,6 @@ class Controller:
                 screen.change_button_to_stop()
 
     def _change_thread_kita_state(self):
-        self.kita.set_mode_and_language(self.mode, self.language)
         if self.ask_kita_is_started:
             if self.ask_kita_is_paused:
                 print("RESUME KITA")
@@ -94,6 +98,10 @@ class Controller:
         if self.ask_kita_is_started and not self.ask_kita_is_paused:
             self.kita.pause()
             self.ask_kita_is_paused = True
+
+    def _upload_corpus(self):
+        corpus_file_path = self.settings.get_file_path()
+        self.kita.update_vocab(corpus_file_path)
 
     def _goto_start(self):
         self.mode, self.language = self._set_mode_and_language()

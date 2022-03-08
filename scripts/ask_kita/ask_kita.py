@@ -1,12 +1,14 @@
 import queue
 import sounddevice as sd
 import vosk
+
 vosk.SetLogLevel(-1)
 import sys
 import json
 import os
 import threading
 from .executors import CommandExecutor, TranscriptionExecutor
+from .parser import Parser
 from scripts.constants import Mode, Language
 
 
@@ -30,7 +32,10 @@ class Ask_KITA(threading.Thread):
         self.previous_line = ""
         self.command_executor = CommandExecutor()
         self.transcription_executor = TranscriptionExecutor()
-        # self.previous_length = 0
+        self.parser = Parser()
+        self.model = None
+        self.recogniser = None
+        self.corpus_uploaded = False
         self.set_mode_and_language(Mode.TRANSCRIPTION.value, Language.ENGLISH.value)
 
     def run(self):
@@ -56,8 +61,17 @@ class Ask_KITA(threading.Thread):
             self.state.notify()  # Unblock self if waiting.
 
     def set_mode_and_language(self, mode, language):
-        self._set_recogniser(language)
+        if not self.corpus_uploaded:
+            self._set_recogniser(language)
         self.mode = mode
+
+    def update_vocab(self, file_path):
+        try:
+            vocab = self.parser.load_custom_vocab(file_path)
+            self.recogniser = vosk.KaldiRecognizer(self.model, self.samplerate, vocab)
+            self.corpus_uploaded = True
+        except:
+            print("COULDNT SUCCESSFULLY Upload corpus")
 
     def _perform_action(self):
         d = self._get_current_phrase_dict()
@@ -90,5 +104,5 @@ class Ask_KITA(threading.Thread):
         self.q.put(bytes(indata))
 
     def _set_recogniser(self, language):
-        model = vosk.Model(_get_model_path(language))
-        self.recogniser = vosk.KaldiRecognizer(model, self.samplerate)
+        self.model = vosk.Model(_get_model_path(language))
+        self.recogniser = vosk.KaldiRecognizer(self.model, self.samplerate)
