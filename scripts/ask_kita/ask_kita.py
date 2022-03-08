@@ -32,8 +32,6 @@ class Ask_KITA(threading.Thread):
         self.previous_line = ""
         self.previous_length = 0
         self.set_mode_and_language(Mode.TRANSCRIPTION.value, Language.ENGLISH.value)
-        # model = vosk.Model(self._get_model_path())
-        # self.recogniser = vosk.KaldiRecognizer(English, self.samplerate)
 
     def run(self):
         self.resume()

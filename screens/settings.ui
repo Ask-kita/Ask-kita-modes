@@ -118,8 +118,8 @@ background-color: rgb(85, 170, 0)</string>
      <rect>
       <x>580</x>
       <y>250</y>
-      <width>121</width>
-      <height>31</height>
+      <width>181</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -143,8 +143,8 @@ background-color: rgb(85, 170, 0)</string>
      <rect>
       <x>580</x>
       <y>350</y>
-      <width>121</width>
-      <height>31</height>
+      <width>181</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -166,9 +166,9 @@ background-color: rgb(85, 170, 0)</string>
    <widget class="QPushButton" name="upload">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>580</x>
       <y>460</y>
-      <width>121</width>
+      <width>161</width>
       <height>51</height>
      </rect>
     </property>

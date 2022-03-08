@@ -3,15 +3,6 @@ from PyQt5.QtWidgets import QDialog
 from .constants import HOME_SCREEN_PATH, SETTINGS_SCREEN_PATH, TRANSCRIPTION_SCREEN_PATH, COMMAND_SCREEN_PATH
 
 
-# def change_button_to_stop(button):
-#     button.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:red')
-#     button.setText("Stop")
-#
-#
-# def change_button_to_start(button, trans):
-#     button.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:green')
-#     button.setText(f"{}")
-
 class HomeScreen(QDialog):
     def __init__(self):
         super(HomeScreen, self).__init__()

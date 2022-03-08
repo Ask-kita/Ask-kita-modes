@@ -1,4 +1,4 @@
-from enum import IntEnum, Enum
+from enum import IntEnum
 
 
 class Screen(IntEnum):
@@ -6,13 +6,3 @@ class Screen(IntEnum):
     SETTINGS = 1
     TRANSCRIPTION = 2
     COMMAND = 3
-
-
-# class Mode(Enum):
-#     TRANSCRIPTION = "Transcription"
-#     COMMAND = "Command"
-#
-#
-# class Language(Enum):
-#     ENGLISH = 'English'
-#     FRENCH = 'French'
