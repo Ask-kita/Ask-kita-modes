@@ -4,12 +4,17 @@ import vosk
 
 # from scripts.controller import Mode, Language
 from scripts.constants import Mode, Language
+
 vosk.SetLogLevel(-1)
 import sys
 import json
 import os
 import pyautogui
+from pynput.mouse import Button, Controller
+
 import threading
+
+mouse = Controller()
 
 
 def _get_model_path(language) -> str:
@@ -44,12 +49,7 @@ class Ask_KITA(threading.Thread):
                         with self.q.mutex:
                             self.q.queue.clear()
                 # Do stuff...
-                if self.mode == Mode.TRANSCRIPTION.value:
-                    self._write_current_phrase()
-                elif self.mode == Mode.COMMAND.value:
-                    print("COMMANDING")
-                else:
-                    print("YOU CANT BE SERIOUS")
+                self._perform_action()
 
     def pause(self):
         with self.state:
@@ -63,6 +63,23 @@ class Ask_KITA(threading.Thread):
     def set_mode_and_language(self, mode, language):
         self._set_recogniser(language)
         self.mode = mode
+
+    def _perform_action(self):
+        d = self._get_current_phrase_dict()
+        (key, value), = d.items()
+        if value and (value != self.previous_line or key == 'text'):
+            self._act(d)
+            self.previous_line = value
+
+    def _act(self, d):
+        (_, value), = d.items()
+        if self.mode == Mode.TRANSCRIPTION.value:
+            self._write(d)
+        elif self.mode == Mode.COMMAND.value:
+            self.perform_command(value)
+            print("COMMANDING")
+        else:
+            print("YOU CANT BE SERIOUS")
 
     def _write_current_phrase(self):
         d = self._get_current_phrase_dict()
@@ -87,6 +104,25 @@ class Ask_KITA(threading.Thread):
         else:
             pyautogui.typewrite(phrase['partial'])
             self.previous_length = len(phrase['partial'])
+
+    def perform_command(self, command):
+        if command == 'click' or command == 'right click':
+            print("CLICKING ...")
+            mouse.click(Button.left, 1)
+        elif command == 'double click':
+            mouse.click(Button.left, 2)
+        elif command == 'enter':
+            pyautogui.press('enter')
+        elif command == 'function one key':
+            pyautogui.press('f1')
+        elif 'control shift f' in command:
+            pyautogui.hotkey('ctrl', 'shift', 'f')
+        elif command == 'alt key equal':
+            with pyautogui.hold('alt'):
+                pyautogui.press(['='])
+
+        elif command == 'save':
+            pyautogui.hotkey('ctrl', 's')
 
     def _callback(self, indata, frames: int, time, status) -> None:
         """This is called (from a separate thread) for each audio block."""
