@@ -102,7 +102,7 @@ class Controller:
         elif self.mode == Mode.COMMAND.value:
             self._goto_command()
         else:
-            print(self.mode, "HUH???")
+            raise NotImplementedError("[Controller] Command not found")
 
     def _goto_home(self):
         self._pause_kita()
