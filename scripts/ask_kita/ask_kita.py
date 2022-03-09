@@ -10,6 +10,8 @@ import threading
 from .executors import CommandExecutor, TranscriptionExecutor
 from .parser import Parser
 from scripts.constants import Mode, Language
+import mouse
+import keyboard
 
 
 def _get_model_path(language) -> str:
@@ -48,6 +50,7 @@ class Ask_KITA(threading.Thread):
                         self.state.wait()  # Block execution until notified.
                         with self.q.mutex:
                             self.q.queue.clear()
+                self.check_mouse_keyboard_events()
                 self._perform_action()
 
     def pause(self):
@@ -105,3 +108,11 @@ class Ask_KITA(threading.Thread):
     def _set_recogniser(self, language):
         self.model = vosk.Model(_get_model_path(language))
         self.recogniser = vosk.KaldiRecognizer(self.model, self.samplerate)
+
+    def check_mouse_keyboard_events(self):
+        if mouse.is_pressed("left"):
+            print("Mouse Pressed")
+            self.transcription_executor.handle_mouse_press()
+        elif keyboard.is_pressed("shift"):
+            print("keyboard Pressed")
+            self.transcription_executor.handle_shift_press()

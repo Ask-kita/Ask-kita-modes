@@ -4,6 +4,7 @@ from scripts.ask_kita import Ask_KITA
 from scripts.view import HomeScreen, SettingsScreen, TranscriptionScreen, CommandScreen
 from .constants import Screen
 from scripts.constants import Mode, Language
+import time
 
 
 class Controller:
@@ -22,6 +23,8 @@ class Controller:
         self.ask_kita_is_paused = False
 
         self.corpus_file_path = None
+        self.start = time.time()
+        self.delay = 1
 
     def run(self):
         self.widget.setCurrentIndex(Screen.HOME)
@@ -63,9 +66,12 @@ class Controller:
         self.command.start.clicked.connect(self._change_kita_state)
 
     def _change_kita_state(self):
-        self.kita.set_mode_and_language(self.mode, self.language)
-        self._change_thread_kita_state()
-        self._change_button_state()
+        end = time.time()
+        if end - self.start >= self.delay:
+            self.kita.set_mode_and_language(self.mode, self.language)
+            self._change_thread_kita_state()
+            self._change_button_state()
+            self.start = time.time()
 
     def _change_button_state(self):
         if self.mode == Mode.TRANSCRIPTION.value:
