@@ -40,6 +40,10 @@ class TranscriptionScreen(ModeScreen):
         loadUi(TRANSCRIPTION_SCREEN_PATH, self)
         self.start_button = self.transcribe
         self.start_text = 'Transcribe'
+        self.cursor = self.textEdit.textCursor()
+
+    def print(self, str):
+        self.cursor.insertText(str)
 
 
 class CommandScreen(ModeScreen):
