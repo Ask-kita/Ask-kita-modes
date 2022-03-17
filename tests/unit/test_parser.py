@@ -1,9 +1,12 @@
 import unittest
 from scripts import Parser
-import tempfile
+from utils import create_temp_file
 import os
 
+
 class TestParser(unittest.TestCase):
+    def setUp(self) -> None:
+        self.parser = Parser()
 
     def setUp(self) -> None:
         self.parser = Parser()
@@ -60,23 +63,10 @@ class TestParser(unittest.TestCase):
             parser = Parser()
             parser.load_custom_vocab(path)
 
-
     def _helper_test_load_custom_vocab(self, file_contents, expected_output):
-        path = self._create_temp_file(file_contents)
+        path = create_temp_file(file_contents)
         actual_output = self.parser.load_custom_vocab(path)
-        print(">" * 100, actual_output)
         os.unlink(path)
         assert not os.path.exists(path)
         self.assertEqual(sorted(actual_output), sorted(expected_output), "vocab should be loaded properly")
         self.assertEqual(len(actual_output), len(expected_output), "vocab should be loaded properly")
-
-    def _create_temp_file(self, str):
-        fp = tempfile.NamedTemporaryFile(mode='w', delete=False)
-        path = fp.name
-        fp.write(str)
-        fp.close()
-        return path
-
-
-if __name__ == '__main__':
-    unittest.main()

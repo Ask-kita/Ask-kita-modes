@@ -24,7 +24,3 @@ class TestExecutors(unittest.TestCase):
             dict = {"not_text": "no execute"}
             no_executor_implementation.execute(dict)
 
-
-
-if __name__ == '__main__':
-    unittest.main()
