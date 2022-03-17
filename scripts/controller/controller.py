@@ -15,6 +15,7 @@ class Controller:
         self.widget.setFixedWidth(1200)
         self.widget.setFixedHeight(800)
         self._add_screens_to_stacked_widget(self._get_all_screens())
+        self.widget.setCurrentIndex(Screen.HOME)
         self.mode = None
         self.language = None
 
@@ -27,7 +28,6 @@ class Controller:
         self.delay = 1
 
     def run(self):
-        self.widget.setCurrentIndex(Screen.HOME)
         self.widget.show()
         try:
             sys.exit(self.app.exec_())

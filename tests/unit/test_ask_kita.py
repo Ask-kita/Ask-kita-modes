@@ -53,6 +53,3 @@ class TestAskKita(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             self.kita.mode = 'not a mode'
             self.kita._act(d)
-
-if __name__ == '__main__':
-    unittest.main()
