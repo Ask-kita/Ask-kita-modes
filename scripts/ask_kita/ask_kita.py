@@ -3,7 +3,7 @@ import sounddevice as sd
 import vosk
 
 vosk.SetLogLevel(-1)
-import sys
+# import sys
 import json
 import os
 import threading
@@ -101,17 +101,11 @@ class Ask_KITA(threading.Thread):
 
     def _callback(self, indata, frames: int, time, status) -> None:
         """This is called (from a separate thread) for each audio block."""
-        if status:
-            print(status, file=sys.stderr)
-            sys.stdout.flush()
-        # print(indata)
+        # if status:
+        #     print(status, file=sys.stderr)
+        #     sys.stdout.flush()
         self.q.put(bytes(indata))
 
     def _set_recogniser(self, language):
         self.model = vosk.Model(_get_model_path(language))
         self.recogniser = vosk.KaldiRecognizer(self.model, self.samplerate)
-
-
-# ask_kita = Ask_KITA()
-#
-# ask_kita.run()

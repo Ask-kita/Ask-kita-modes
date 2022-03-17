@@ -18,7 +18,11 @@ class TestAskKita(unittest.TestCase):
 
     def test_pause(self):
         self.kita.pause()
+        time.sleep(0.5)
         self.assertTrue(self.kita.paused)
+        self.kita.resume()
+        time.sleep(0.5)
+        self.assertFalse(self.kita.paused)
 
     def test_resume(self):
         self.kita.resume()
@@ -45,7 +49,7 @@ class TestAskKita(unittest.TestCase):
         self.kita._act(d)
 
     def test_act_not_a_mode(self):
-        d = {'text': 'hellow world'}
+        d = {'text': 'hello world'}
         with self.assertRaises(NotImplementedError):
             self.kita.mode = 'not a mode'
             self.kita._act(d)
