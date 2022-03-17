@@ -24,6 +24,7 @@ class Ask_KITA(threading.Thread):
         super(Ask_KITA, self).__init__()
         self.daemon = True
         self.paused = True  # Start out paused.
+        self.running = True
         self.state = threading.Condition()
 
         self.q = queue.Queue()
@@ -42,7 +43,7 @@ class Ask_KITA(threading.Thread):
         self.resume()
         with sd.RawInputStream(samplerate=self.samplerate, blocksize=8000, device=None, dtype='int16', channels=1,
                                callback=self._callback):
-            while True:
+            while self.running:
                 with self.state:
                     if self.paused:
                         self.state.wait()  # Block execution until notified.
@@ -58,6 +59,9 @@ class Ask_KITA(threading.Thread):
         with self.state:
             self.paused = False
             self.state.notify()  # Unblock self if waiting.
+
+    def end(self):
+        self.running = False
 
     def set_mode_and_language(self, mode, language):
         if not self.corpus_uploaded:
@@ -100,8 +104,14 @@ class Ask_KITA(threading.Thread):
         if status:
             print(status, file=sys.stderr)
             sys.stdout.flush()
+        # print(indata)
         self.q.put(bytes(indata))
 
     def _set_recogniser(self, language):
         self.model = vosk.Model(_get_model_path(language))
         self.recogniser = vosk.KaldiRecognizer(self.model, self.samplerate)
+
+
+# ask_kita = Ask_KITA()
+#
+# ask_kita.run()
