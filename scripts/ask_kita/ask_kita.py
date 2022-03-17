@@ -11,6 +11,7 @@ from .executors import CommandExecutor, TranscriptionExecutor
 from .parser import Parser
 from scripts.constants import Mode, Language
 
+
 def _get_model_path(language) -> str:
     full_path = os.path.realpath(__file__)
     file_dir = os.path.dirname(full_path)
