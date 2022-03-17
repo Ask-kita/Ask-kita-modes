@@ -6,7 +6,6 @@ import time
 class Executor:
     def __init__(self):
         self.previous_length = 0
-        pass
 
     def execute(self, dict):
         raise NotImplementedError("[Eexcutor] execute not implemented")
