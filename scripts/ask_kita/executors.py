@@ -37,7 +37,6 @@ class CommandExecutor(Executor):
 
     def _execute(self, command):
         if command in 'click' or command in 'right click':
-            print("CLICKING ...")
             self.mouse.click(Button.left, 1)
         elif command in 'double click':
             self.mouse.click(Button.left, 2)
