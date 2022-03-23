@@ -1,3 +1,0 @@
-pyinstaller --noconfirm --onedir --console --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/screens;screens/" --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/models;models/" --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/v_env/Lib/site-packages/vosk;vosk/"  "C:/Users/User/Documents/GitHub/Ask-kita-modes/main.py"
-
-pyinstaller --noconfirm --onedir --windowed --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/models;models/" --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/screens;screens/" --add-data "C:/Users/User/Documents/GitHub/Ask-kita-modes/v_env/Lib/site-packages/vosk;vosk/"  "C:/Users/User/Documents/GitHub/Ask-kita-modes/main.py"
