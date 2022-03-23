@@ -35,7 +35,7 @@ class ModeScreen(QDialog):
         self.start_button.setText("Stop")
 
     def change_button_to_transcribe(self):
-        self.start_button.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:green')
+        self.start_button.setStyleSheet('border-radius:20px; font: 75 18pt "MS Shell Dlg 2";background-color:rgb(204, 204, 204)')
         self.start_button.setText(f"{self.start_text}")
 
 
