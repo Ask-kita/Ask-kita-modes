@@ -24,7 +24,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QWidget#widget{
-background-color:qlineargradient(spread:pad, x1:0.0549451, y1:0.057, x2:0.884615, y2:0.896, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(255, 255, 255, 255));}</string>
+background-color:rgb(255, 255, 255);}</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -36,7 +36,7 @@ background-color:qlineargradient(spread:pad, x1:0.0549451, y1:0.057, x2:0.884615
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
+     <string notr="true">color: rgb(0, 0, 0);
 font: 75 48pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
@@ -66,7 +66,7 @@ font: 75 48pt &quot;MS Shell Dlg 2&quot;;</string>
      <string notr="true">border-radius:20px;
 font: 75 18pt &quot;MS Shell Dlg 2&quot;;
 
-background-color: rgb(85, 170, 0)</string>
+background-color: rgb(204, 204, 204)</string>
     </property>
     <property name="text">
      <string>Transcribe</string>
@@ -85,7 +85,7 @@ background-color: rgb(85, 170, 0)</string>
      <string notr="true">border-radius:20px;
 font: 75 18pt &quot;MS Shell Dlg 2&quot;;
 
-background-color: rgb(85, 170, 0)</string>
+background-color: rgb(204, 204, 204)</string>
     </property>
     <property name="text">
      <string>Home</string>
