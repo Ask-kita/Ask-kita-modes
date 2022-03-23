@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1198</width>
+    <height>793</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,25 +24,13 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QWidget#widget{
-background-color:qlineargradient(spread:pad, x1:0.0549451, y1:0.057, x2:0.884615, y2:0.896, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(255, 255, 255, 255));}</string>
+background-color:qlineargradient(spread:pad, x1:0.0549451, y1:0.057, x2:0.884615, y2:0.896, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(255, 255, 255, 255));}
+
+
+
+
+</string>
    </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>80</y>
-      <width>501</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 75 48pt &quot;MS Shell Dlg 2&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Ask-KITA</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="start">
     <property name="geometry">
      <rect>
@@ -83,6 +71,8 @@ background-color: rgb(170, 170, 255)</string>
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="back.qrc"/>
+ </resources>
  <connections/>
 </ui>

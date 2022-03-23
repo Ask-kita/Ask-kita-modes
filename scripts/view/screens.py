@@ -1,12 +1,17 @@
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog, QFileDialog
-from .constants import HOME_SCREEN_PATH, SETTINGS_SCREEN_PATH, TRANSCRIPTION_SCREEN_PATH, COMMAND_SCREEN_PATH
+from .constants import HOME_SCREEN_PATH, SETTINGS_SCREEN_PATH, TRANSCRIPTION_SCREEN_PATH, COMMAND_SCREEN_PATH, \
+    BACKGROUND_PATH
+
+background = str(BACKGROUND_PATH).replace("\\", "/")
+stylesheet = "QWidget#widget{background-image:" + f"url({background});" + "}"
 
 
 class HomeScreen(QDialog):
     def __init__(self):
         super(HomeScreen, self).__init__()
         loadUi(HOME_SCREEN_PATH, self)
+        self.widget.setStyleSheet(stylesheet)
 
 
 class SettingsScreen(QDialog):
@@ -40,7 +45,6 @@ class TranscriptionScreen(ModeScreen):
         loadUi(TRANSCRIPTION_SCREEN_PATH, self)
         self.start_button = self.transcribe
         self.start_text = 'Transcribe'
-
 
 
 class CommandScreen(ModeScreen):
