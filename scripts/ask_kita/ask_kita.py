@@ -10,6 +10,8 @@ from .executors import CommandExecutor, TranscriptionExecutor
 from .parser import Parser
 from scripts.constants import Mode, Language
 
+# how to start and stop a thread
+# https://stackoverflow.com/questions/15729498/how-to-start-and-stop-thread?fbclid=IwAR1IXcnjpto9jxGxWBnoJhthPo_7Qe6Mk2YaDY2iouLeEYf3R4Gva3f14M8
 
 def _get_model_path(language) -> str:
     full_path = os.path.realpath(__file__)
