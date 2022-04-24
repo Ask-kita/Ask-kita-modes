@@ -44,11 +44,11 @@ class Controller:
         self.settings = SettingsScreen()
         self.transcription = TranscriptionScreen()
         self.command = CommandScreen()
-        self._set_add_event_handlers()
+        self._set_event_handlers()
         return {Screen.HOME: self.home, Screen.SETTINGS: self.settings, Screen.TRANSCRIPTION: self.transcription,
                 Screen.COMMAND: self.command}
 
-    def _set_add_event_handlers(self):
+    def _set_event_handlers(self):
         # home
         self.home.settings.clicked.connect(self._goto_settings)
         self.home.start.clicked.connect(self._goto_start)
