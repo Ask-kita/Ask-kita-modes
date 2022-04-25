@@ -38,6 +38,7 @@ class TestIntegration(unittest.TestCase):
         controller = Controller()
         controller._goto_start()
         time.sleep(1)
+        self.assertEqual(controller.widget.currentIndex(), Screen.TRANSCRIPTION)
         controller._change_kita_state()
         time.sleep(3)
         self.assertTrue(controller.ask_kita_is_started)

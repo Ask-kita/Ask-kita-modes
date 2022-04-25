@@ -8,9 +8,6 @@ class TestParser(unittest.TestCase):
     def setUp(self) -> None:
         self.parser = Parser()
 
-    def setUp(self) -> None:
-        self.parser = Parser()
-
     def test_basic_tokenise(self):
         line_to_tokenise = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
         expected_output = ["It", "is", "a", "long", "established",

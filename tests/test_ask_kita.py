@@ -3,6 +3,7 @@ from scripts import ask_kita
 import time
 from utils import create_temp_file
 
+
 class TestAskKita(unittest.TestCase):
     def setUp(self) -> None:
         self.kita = ask_kita.Ask_KITA()
