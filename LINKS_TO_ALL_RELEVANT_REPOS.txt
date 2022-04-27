@@ -1,0 +1,8 @@
+
+MotionInput : https://github.com/MotionInput/MI_Windows
+
+Ask-Kita-modes : https://github.com/Ask-kita/Ask-kita-modes
+
+AskKita-WPF-Hello-World : https://github.com/Ask-kita/AskKita-WPF-Hello-World
+
+FISECARE : https://github.com/comp0016-team35/FISECARE
